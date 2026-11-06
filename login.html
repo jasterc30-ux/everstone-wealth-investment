@@ -21,7 +21,7 @@
 .auth-form-wrap{display:grid;place-items:center;padding:40px 22px}.auth-card{width:min(100%,440px);background:#fff;border:1px solid var(--line);padding:clamp(25px,4vw,42px);box-shadow:0 15px 45px #102d1b0a}
 .auth-card .eyebrow{color:#98783f}.auth-card h2{font:500 34px 'Playfair Display';color:var(--green);margin:7px 0}.auth-subtitle{font-size:13px;color:var(--muted);margin:0 0 22px}
 .auth-card label{display:block;font-size:12px;font-weight:700;margin:17px 0 7px;color:var(--ink)}
-.auth-card input{width:100%;padding:13px;border:1px solid #cfd8d0;background:#fff;color:var(--ink);font:13px 'DM Sans',sans-serif;border-radius:2px}
+.auth-card input{display:block;width:100%;min-height:46px;padding:13px;border:1px solid #cfd8d0;background:#fff;color:var(--ink);font:16px 'DM Sans',sans-serif;border-radius:2px;pointer-events:auto;touch-action:manipulation;user-select:text;-webkit-user-select:text;position:relative;z-index:2;opacity:1}
 .auth-card input:focus{outline:2px solid var(--gold);outline-offset:1px}
 .password-wrap{position:relative}.password-wrap input{padding-right:75px}.show-password{position:absolute;right:9px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--green);font:700 10px 'DM Sans';cursor:pointer}
 .forgot-row{text-align:right;margin-top:9px}.forgot-row a,.auth-links a{font-size:11px;color:var(--green);font-weight:700}
@@ -39,8 +39,8 @@
 <section class="auth-story"><p class="eyebrow">EVERSTONE CLIENT ACCESS</p><h1>A more considered way to access your <em>account.</em></h1><p>The Everstone client portal is being prepared with a focus on clear information, privacy and responsible account management.</p><div class="story-mark">CLARITY · CARE · ACCOUNTABILITY</div></section>
 <section class="auth-form-wrap"><form class="auth-card" id="loginForm"><p class="eyebrow">CLIENT PORTAL</p><h2>Welcome back</h2><p class="auth-subtitle">Sign in to your Everstone account.</p>
 <div class="preview-notice"><strong>Preview mode:</strong> Secure sign-in is not connected yet. These fields are for design preview only. Do not enter a real password or sensitive personal information. Nothing is submitted or stored.</div>
-<label for="email">Email address or username</label><input id="email" type="text" autocomplete="off" placeholder="Enter your email or username">
-<label for="password">Password</label><div class="password-wrap"><input id="password" type="password" autocomplete="off" placeholder="Enter your password"><button class="show-password" type="button" id="togglePassword" aria-label="Show password">SHOW</button></div>
+<label for="email">Email address or username</label><input id="email" name="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="Enter your email or username">
+<label for="password">Password</label><div class="password-wrap"><input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password"><button class="show-password" type="button" id="togglePassword" aria-label="Show password">SHOW</button></div>
 <div class="forgot-row"><a href="#" id="forgotLink">Forgot password?</a></div>
 <button class="submit-preview" type="button" disabled>CLIENT LOGIN — COMING SOON</button>
 <p class="auth-links">New to Everstone? <a href="register.html">Create an account</a></p>
