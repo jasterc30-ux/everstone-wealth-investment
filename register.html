@@ -10,7 +10,7 @@
 .auth-story h1{font:500 clamp(36px,4.8vw,60px)/1.12 'Playfair Display',Georgia,serif;margin:22px 0}.auth-story p{max-width:440px;color:#dce8df;line-height:1.8}
 .auth-form-wrap{display:grid;place-items:center;padding:30px 18px}.auth-card{width:min(100%,470px);background:#fff;border:1px solid #dce4dc;padding:clamp(23px,4vw,40px);box-shadow:0 18px 50px #102d1b0c}
 .auth-card h2{font:500 32px 'Playfair Display',Georgia,serif;color:#17432c;margin:8px 0}.intro{font-size:13px;color:#66736a;line-height:1.6}
-.auth-card label{display:block;font-size:12px;font-weight:600;color:#263b2d;margin:14px 0 6px}.auth-card input{width:100%;box-sizing:border-box;padding:13px;border:1px solid #cfd9d0;background:#fff;font:inherit;border-radius:2px;color:#1c2d21}
+.auth-card label{display:block;font-size:12px;font-weight:600;color:#263b2d;margin:14px 0 6px}.auth-card input{display:block;width:100%;min-height:46px;box-sizing:border-box;padding:13px;border:1px solid #cfd9d0;background:#fff;font:16px 'DM Sans',sans-serif;border-radius:2px;color:#1c2d21;pointer-events:auto;touch-action:manipulation;user-select:text;-webkit-user-select:text;position:relative;z-index:2;opacity:1}
 .auth-card input:focus{outline:2px solid #b99550;outline-offset:1px}.password-wrap{display:flex;gap:8px}.password-wrap input{flex:1;min-width:0}.password-wrap button{border:1px solid #cfd9d0;background:#f7f8f5;color:#23432f;padding:0 12px;font-size:12px}
 .notice{background:#fff7e6;border:1px solid #ead9ad;padding:12px;color:#705b2b;font-size:11px;line-height:1.6;margin:17px 0}
 .preview-button{width:100%;margin-top:20px;border:0;padding:14px;background:#17432c;color:#fff;font:600 13px 'DM Sans',sans-serif;opacity:.58;cursor:not-allowed}
@@ -27,10 +27,10 @@
 <section class="auth-story"><div class="section-label">CLIENT ONBOARDING</div><h1>A considered beginning to your client journey.</h1><p>We are shaping a clear and secure client experience, with access to relevant information and service updates once the account platform is ready.</p></section>
 <section class="auth-form-wrap"><form class="auth-card" onsubmit="return false;"><div class="section-label">EVERSTONE CLIENT PORTAL</div><h2>Create an account</h2><p class="intro">Choose a username you can use alongside your password when signing in. Enter sample details to preview the layout.</p>
 <div class="notice"><strong>Preview only.</strong> This form is not connected to a database, identity checks or an account service. Do not enter real personal, banking or password information.</div>
-<label for="name">Full name</label><input id="name" name="name" type="text" placeholder="Enter a sample name" autocomplete="off">
-<label for="username">Choose username</label><input id="username" name="username" type="text" placeholder="Create your login username" autocomplete="off">
-<label for="email">Email address</label><input id="email" name="email" type="email" placeholder="name@example.com" autocomplete="off">
-<label for="country">Country of residence</label><input id="country" name="country" type="text" placeholder="Enter a sample country" autocomplete="off">
+<label for="name">Full name</label><input id="name" name="name" type="text" placeholder="Enter a sample name" autocomplete="name">
+<label for="username">Choose username</label><input id="username" name="username" type="text" placeholder="Create your login username" autocomplete="username" autocapitalize="none" spellcheck="false">
+<label for="email">Email address</label><input id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email">
+<label for="country">Country of residence</label><input id="country" name="country" type="text" placeholder="Enter a sample country" autocomplete="country-name">
 <label for="password">Create password</label><div class="password-wrap"><input id="password" name="password" type="password" placeholder="Use a sample password" autocomplete="new-password"><button type="button" id="togglePassword">Show</button></div>
 <button class="preview-button" type="button" disabled>Registration not connected yet</button><div class="auth-links">Already have an account? <a href="login.html">Sign in</a></div>
 </form></section></main>
