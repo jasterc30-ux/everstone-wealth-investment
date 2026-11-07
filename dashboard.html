@@ -52,14 +52,14 @@ main{min-width:0;padding:30px clamp(20px,4vw,56px) 45px;max-width:1500px;width:1
 <div class="side-foot">EVERSTONE WEALTH INVESTMENT<br>Client portal preview</div>
 </aside>
 <main>
-<header class="topbar"><div><div class="eyebrow">INVESTOR PORTAL</div><h2>Overview</h2></div><div class="top-actions"><span class="preview">PREVIEW · NOT LIVE</span><span class="avatar">E</span></div></header>
-<section class="welcome"><h1>Welcome back</h1><p>Your account at a glance. Select a section to view its details.</p></section>
-<div class="notice"><span>ⓘ</span><div><strong>Preview account — no live funds connected</strong>This is a design preview. Account authentication, verified balances, investments and financial transactions are not connected. Do not send money or enter sensitive account details here.</div></div>
+<header class="topbar"><div><div class="eyebrow">INVESTOR PORTAL</div><h2>Overview</h2></div><div class="top-actions"><span class="preview" id="accountStatus">SECURE ACCOUNT</span><span class="avatar" id="avatar">E</span><button id="signOut" type="button" style="border:1px solid #c6a86a;background:#fff;padding:9px 12px;color:#123c2c;font-size:10px;font-weight:700;cursor:pointer">SIGN OUT</button></div></header>
+<section class="welcome"><h1 id="welcomeTitle">Welcome to Everstone</h1><p id="welcomeText">Your secure client account.</p></section>
+<div class="notice"><span>ⓘ</span><div><strong>Account access is connected — financial services are not active</strong>Your sign-in and personal profile are protected. No deposits, withdrawals, investment balances or returns are processed by this portal. Never send funds to an address supplied through this preview.</div></div>
 <section class="balance"><div><div class="label">AVAILABLE BALANCE</div><strong>— — —</strong><small>Displayed after secure account and ledger integration</small></div><a class="balance-link" href="deposit.html">OPEN WALLET&nbsp; →</a></section>
 <section class="stats" aria-label="Account summary">
 <div class="stat"><span>Total invested</span><b>— — —</b><small>Awaiting verified account data</small></div>
 <div class="stat"><span>Active investments</span><b>—</b><small>No live records connected</small></div>
-<div class="stat"><span>Account status</span><b>Preview</b><small>Demo interface only</small></div>
+<div class="stat"><span>Account status</span><b>Verified</b><small>Signed-in account</small></div>
 </section>
 <section><div class="section-head"><div><h3>Your account</h3><p>Choose a section to continue</p></div></div>
 <div class="tiles">
@@ -70,8 +70,31 @@ main{min-width:0;padding:30px clamp(20px,4vw,56px) 45px;max-width:1500px;width:1
 <a class="tile" href="referrals.html"><span class="tile-icon">♧</span><b>Referral centre</b><p>View referral programme information.</p><em>Open referrals&nbsp; →</em></a>
 <a class="tile" href="profile.html"><span class="tile-icon">◎</span><b>Profile &amp; security</b><p>View profile and account-security settings.</p><em>Open account&nbsp; →</em></a>
 </div></section>
-<p class="bottom-note">This is a non-functional visual preview. Live account access requires secure server-side authentication, verified company and compliance details, a protected account ledger and independently tested payment arrangements. No balances, returns or transaction records are represented here.</p>
+<p class="bottom-note">Your identity is managed by Supabase Auth and your profile is protected by database row-level security. Wallet, deposits, withdrawals, investment records and referral rewards remain inactive until legal, compliance, payment and accounting controls are independently verified.</p>
 </main>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/dist/umd/supabase.js"></script>
+<script src="supabase-client.js"></script>
+<script>
+(async()=>{
+ const client=window.evSupabase;
+ if(!client){location.replace('login.html');return;}
+ const {data:{session},error:sessionError}=await client.auth.getSession();
+ if(sessionError||!session){location.replace('login.html');return;}
+ const user=session.user;
+ const {data:profile,error}=await client.from('profiles').select('full_name,username,country').eq('id',user.id).single();
+ if(error){console.error('Profile load failed:',error.message);}
+ const displayName=profile?.full_name||user.email||'Client';
+ document.getElementById('welcomeTitle').textContent='Welcome, '+displayName;
+ document.getElementById('welcomeText').textContent='You are signed in as '+(user.email||'an Everstone client')+'.';
+ document.getElementById('avatar').textContent=(displayName.trim()[0]||'E').toUpperCase();
+ document.getElementById('signOut').addEventListener('click',async()=>{
+  const button=document.getElementById('signOut');button.disabled=true;button.textContent='SIGNING OUT…';
+  const {error}=await client.auth.signOut();
+  if(error){button.disabled=false;button.textContent='SIGN OUT';alert('Sign out failed. Please try again.');return;}
+  location.replace('login.html');
+ });
+})();
+</script>
 </body>
 </html>
